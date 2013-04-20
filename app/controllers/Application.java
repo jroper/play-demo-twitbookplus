@@ -17,31 +17,21 @@ public class Application extends Controller {
     }
 
     public static Result router() throws Exception {
-        return ok(getJavascriptReverseRouter()).as("text/javascript");
+        return ok(Routes.javascriptRouter("routes",
+                routes.javascript.UserController.getUser(),
+                routes.javascript.UserController.search(),
+                routes.javascript.UserController.newUser(),
+                routes.javascript.UserController.current(),
+                routes.javascript.UserController.signIn(),
+                routes.javascript.UserController.logOut(),
+                routes.javascript.UserController.followUser(),
+                routes.javascript.UserController.unfollowUser(),
+                routes.javascript.FeedController.updateStatus(),
+                routes.javascript.FeedController.getFeed(),
+                routes.javascript.FeedController.getFeedForUser(),
+                routes.javascript.FeedController.like(),
+                routes.javascript.FeedController.unlike(),
+                routes.javascript.FeedController.trending()
+        )).as("text/javascript");
     }
-
-
-    private static String javascriptReverseRouter;
-
-    private static String getJavascriptReverseRouter() throws Exception {
-        if (javascriptReverseRouter == null) {
-            List<Router.JavascriptReverseRoute> javascriptRoutes = new ArrayList<>();
-            javascriptRoutes.addAll(scanRouter(routes.javascript.UserController));
-            javascriptRoutes.addAll(scanRouter(routes.javascript.FeedController));
-            javascriptReverseRouter = Routes.javascriptRouter("routes", javascriptRoutes.toArray(new Router.JavascriptReverseRoute[0]));
-        }
-        return javascriptReverseRouter;
-    }
-
-    private static List<Router.JavascriptReverseRoute> scanRouter(Object router) throws Exception {
-        List<Router.JavascriptReverseRoute> routes = new ArrayList<>();
-        for (Method method: router.getClass().getMethods()) {
-            if (method.getParameterTypes().length == 0 &&
-                    Router.JavascriptReverseRoute.class.isAssignableFrom(method.getReturnType())) {
-                routes.add(Router.JavascriptReverseRoute.class.cast(method.invoke(router)));
-            }
-        }
-        return routes;
-    }
-
 }

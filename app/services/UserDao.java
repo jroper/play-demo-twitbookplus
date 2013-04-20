@@ -4,6 +4,8 @@ import models.User;
 import org.mongojack.DBQuery;
 import org.mongojack.DBUpdate;
 import org.mongojack.JacksonDBCollection;
+import play.Application;
+import play.modules.mongojack.MongoDBPlugin;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,8 +19,8 @@ public class UserDao {
     private final JacksonDBCollection<User, String> coll;
 
     @Inject
-    public UserDao(MongoConnectionManager mongo) {
-        this.coll = JacksonDBCollection.wrap(mongo.getDb().getCollection("users"), User.class, String.class);
+    public UserDao(Application app) {
+        this.coll = app.plugin(MongoDBPlugin.class).getCollection("users", User.class, String.class);
     }
 
     public User get(String id) {
@@ -50,6 +52,10 @@ public class UserDao {
     public void unfollow(String id, String toFollow) {
         coll.updateById(id, DBUpdate.pull("following", toFollow));
         coll.updateById(toFollow, DBUpdate.pull("followers", id));
+    }
+
+    public void incrementUpdates(String id) {
+        coll.updateById(id, DBUpdate.inc("updates"));
     }
 
 }

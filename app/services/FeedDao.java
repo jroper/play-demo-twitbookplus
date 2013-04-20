@@ -1,8 +1,12 @@
 package services;
 
+import com.mongodb.CommandResult;
 import models.StatusUpdate;
 import models.TrendingTerm;
 import org.mongojack.*;
+import play.Application;
+import play.Logger;
+import play.modules.mongojack.MongoDBPlugin;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -12,8 +16,8 @@ public class FeedDao {
     private final JacksonDBCollection<StatusUpdate, String> coll;
 
     @Inject
-    public FeedDao(MongoConnectionManager mongo) {
-        this.coll = JacksonDBCollection.wrap(mongo.getDb().getCollection("feed"), StatusUpdate.class, String.class);
+    public FeedDao(Application app) {
+        this.coll = app.plugin(MongoDBPlugin.class).getCollection("feed", StatusUpdate.class, String.class);
     }
 
     public List<StatusUpdate> getFeed(List<String> userIds) {
@@ -42,8 +46,8 @@ public class FeedDao {
         this.coll.updateById(statusUpdateId, DBUpdate.pull("likes", userId));
     }
 
-    public List<TrendingTerm> trending() {
-        JacksonDBCollection<TrendingTerm, String> trending = this.coll.mapReduce(MapReduce.build(
+    public void indexTrendingTerms() {
+        CommandResult result = this.coll.mapReduce(MapReduce.build(
             "function() {" +
             "  var terms = this.text.split(' ');" +
             "  for (var i in terms) {" +
@@ -66,7 +70,11 @@ public class FeedDao {
             String.class
         ).setQuery(
                 DBQuery.greaterThan("date", new Date(System.currentTimeMillis() - 84600000))
-        )).getOutputCollection();
-        return trending.find().sort(DBSort.desc("value")).toArray();
+        )).getCommandResult();
+        if (result.ok()) {
+            Logger.info("Successfully indexed trending terms");
+        } else {
+            Logger.warn("Error indexing trending terms: " + result.getErrorMessage());
+        }
     }
 }

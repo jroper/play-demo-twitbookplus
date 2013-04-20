@@ -6,6 +6,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.FeedDao;
+import services.TrendingDao;
 import services.UserDao;
 
 import javax.inject.Inject;
@@ -17,11 +18,13 @@ public class FeedController extends Controller {
 
     private final FeedDao feedDao;
     private final UserDao userDao;
+    private final TrendingDao trendingDao;
 
     @Inject
-    public FeedController(FeedDao feedDao, UserDao userDao) {
+    public FeedController(FeedDao feedDao, UserDao userDao, TrendingDao trendingDao) {
         this.feedDao = feedDao;
         this.userDao = userDao;
+        this.trendingDao = trendingDao;
     }
 
     @Security.Authenticated
@@ -79,11 +82,12 @@ public class FeedController extends Controller {
     public Result updateStatus() {
         String text = request().body().asJson().get("status").asText();
         feedDao.save(new StatusUpdate(request().username(), text));
+        userDao.incrementUpdates(request().username());
         return noContent();
     }
 
     public Result trending() {
-        return ok(Json.toJson(feedDao.trending()));
+        return ok(Json.toJson(trendingDao.getTrendingTerms()));
     }
 
     public static class StatusUpdateView {
