@@ -79,7 +79,7 @@ public class FeedController extends Controller {
     public Result updateStatus() {
         String text = request().body().asJson().get("status").asText();
         feedDao.save(new StatusUpdate(request().username(), text));
-        userDao.incrementUpdates(request().username())o;
+        userDao.incrementUpdates(request().username());
         return noContent();
     }
 
