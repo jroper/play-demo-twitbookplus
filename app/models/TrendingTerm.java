@@ -8,7 +8,9 @@ public class TrendingTerm {
     private final String term;
     private final int count;
 
-    public TrendingTerm(@Id String term, @JsonProperty("value") int count) {
+    public TrendingTerm(
+            String term,
+            int count) {
         this.term = term;
         this.count = count;
     }
