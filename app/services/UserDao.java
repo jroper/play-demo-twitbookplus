@@ -52,4 +52,8 @@ public class UserDao {
         coll.updateById(toFollow, DBUpdate.pull("followers", id));
     }
 
+    public void incrementUpdates(String id) {
+        coll.updateById(id, DBUpdate.inc("updates"));
+    }
+
 }
