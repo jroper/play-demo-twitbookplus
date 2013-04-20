@@ -204,15 +204,13 @@ require(["webjars!knockout.js", 'webjars!jquery.js', "/routes.js", "webjars!boot
             }).done(function(data) {
                 self.loggedInUser(data);
                 self.navigateToUrl(window.location.pathname);
-            }).error(function() {
-                // todo
             });
         };
 
         self.logOut = function() {
             ajax(self.userController.logOut()).done(function() {
-                resetView();
                 self.loggedInUser(null);
+                goTo("feed", "/")
             });
         };
 
@@ -234,7 +232,6 @@ require(["webjars!knockout.js", 'webjars!jquery.js', "/routes.js", "webjars!boot
                 self.checkCurrentUser();
                 self.closeDialogs();
             });
-
         };
 
         self.checkCurrentUser = function(cb) {

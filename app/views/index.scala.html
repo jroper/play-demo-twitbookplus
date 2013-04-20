@@ -12,16 +12,13 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
-        <a class="brand" href="#">TwitBook+</a>
+        <a class="brand" data-bind="click: viewFeed">TwitBook+</a>
         <ul class="nav" data-bind="if: loggedInUser">
             <li>
                 <a href="#" data-bind="click: viewFeed">Feed</a>
             </li>
             <li>
                 <a href="#" data-bind="click: updateStatus">Update status</a>
-            </li>
-            <li>
-                <a href="#" data-bind="click: viewFollowing">Following</a>
             </li>
             <li>
                 <a href="#" data-bind="click: viewTrending">Trending</a>
@@ -31,15 +28,18 @@
             <li data-bind="ifnot: loggedInUser">
                 <a href="#" data-bind="click: signIn">Sign in</a>
             </li>
-            <li class="dropdown" data-bind="if: loggedInUser">
+            <li class="dropdown" data-bind="with: loggedInUser">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span data-bind="text: loggedInUser().name">No one</span>
-                    <img data-bind="attr: { src: loggedInUser().gravatar + '?s=24'}"/>
+                    <span data-bind="text: $data.name"></span>
+                    <img data-bind="attr: { src: $data.gravatar + '?s=24'}"/>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#" data-bind="click: logOut">Log out</a>
+                        <a href="#" data-bind="click: $root.viewProfile">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: $root.logOut">Log out</a>
                     </li>
                 </ul>
             </li>
