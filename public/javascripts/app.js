@@ -170,7 +170,7 @@ require(["webjars!knockout.js", 'webjars!jquery.js', "/routes.js", "webjars!boot
 
         // Search on key press
         self.userSearchField.subscribe(function(value) {
-            if (value.length > 2) {
+            if (value.length > 0) {
                 ajax(self.userController.search(value)).done(function(results) {
                     results.forEach(setupFollowProps);
                     self.userSearchResults(results);
