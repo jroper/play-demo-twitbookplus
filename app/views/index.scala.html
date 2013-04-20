@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>TwitBook+</title>
+    <link rel='stylesheet' media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.css"))'>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script data-main="/assets/javascripts/app.js" type='text/javascript' src='@routes.WebJarAssets.requirejs'></script>
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="brand" href="#">TwitBook+</a>
+        <ul class="nav" data-bind="if: loggedInUser">
+            <li>
+                <a href="#" data-bind="click: viewFeed">Feed</a>
+            </li>
+            <li>
+                <a href="#" data-bind="click: updateStatus">Update status</a>
+            </li>
+            <li>
+                <a href="#" data-bind="click: viewFollowing">Following</a>
+            </li>
+            <li>
+                <a href="#" data-bind="click: viewTrending">Trending</a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li data-bind="ifnot: loggedInUser">
+                <a href="#" data-bind="click: signIn">Sign in</a>
+            </li>
+            <li class="dropdown" data-bind="if: loggedInUser">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span data-bind="text: loggedInUser().name">No one</span>
+                    <img data-bind="attr: { src: loggedInUser().gravatar + '?s=24'}"/>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-bind="click: logOut">Log out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="content">
+        <div data-bind="with: feed">
+            @feed()
+        </div>
+        @following()
+        @followers()
+        @profile()
+        @trending()
+    </div>
+
+    <div id="signInDialog" class="modal fade hide" tabindex="-1" data-bind="with: signInForm">
+        <div class="modal-header">
+            <button type="button" class="close" data-bind="click: $root.closeDialogs"> × </button>
+            <h3 id="signInDialogLabel">Sign in</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label>Email</label>
+                    <input type="text" data-bind="value: email">
+                    <label>Password</label>
+                    <input type="password" data-bind="value: password">
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-bind="click: $root.signUp">Sign up</a>
+            <button class="btn btn-primary" data-bind="click: $root.logIn">Log in</button>
+        </div>
+    </div>
+
+    <div id="signUpDialog" class="modal fade hide" tabindex="-1" data-bind="with: signUpForm">
+        <div class="modal-header">
+            <button type="button" class="close" data-bind="click: $root.closeDialogs"> × </button>
+            <h3 id="signUpDialogLabel">Sign up</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label>Email</label>
+                    <input type="text" data-bind="value: email">
+                    <label>Name</label>
+                    <input type="text" data-bind="value: name">
+                    <label>Password</label>
+                    <input type="password" data-bind="value: password">
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-bind="click: $root.closeDialogs">Cancel</a>
+            <button class="btn btn-primary" data-bind="click: $root.submitSignUp">Sign up</button>
+        </div>
+    </div>
+
+    <div id="statusUpdateDialog" class="modal fade hide" tabindex="-1">
+        <div class="modal-header">
+            <button type="button" class="close" data-bind="click: $root.closeDialogs"> × </button>
+            <h3>Update Status</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label>Status</label>
+                    <textarea data-bind="value: statusUpdateField"></textarea>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-bind="click: $root.closeDialogs">Cancel</a>
+            <button class="btn btn-primary" data-bind="click: $root.submitStatusUpdate">Submit</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

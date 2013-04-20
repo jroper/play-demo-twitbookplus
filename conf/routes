@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index(path = "")
+
+# Logged in user actions
+GET     /api/user/current                @controllers.UserController.current
+POST    /api/user/current                @controllers.UserController.signIn
+DELETE  /api/user/current                @controllers.UserController.logOut
+POST    /api/user/current/following/:id  @controllers.UserController.followUser(id)
+DELETE  /api/user/current/following/:id  @controllers.UserController.unfollowUser(id)
+
+# User resources
+GET     /api/user/:id                   @controllers.UserController.getUser(id)
+GET     /api/user                       @controllers.UserController.search(q)
+POST    /api/user                       @controllers.UserController.newUser
+
+# Feed resources
+POST    /api/feed                       @controllers.FeedController.updateStatus
+GET     /api/feed                       @controllers.FeedController.getFeed
+GET     /api/user/:id/feed              @controllers.FeedController.getFeedForUser(id)
+POST    /api/feed/:id/likes             @controllers.FeedController.like(id)
+DELETE  /api/feed/:id/likes             @controllers.FeedController.unlike(id)
+
+GET     /api/trending                   @controllers.FeedController.trending
+
+# Assets of sorts
+GET     /lib/require.js             controllers.WebJarAssets.requirejs
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /routes.js                  controllers.Application.router
+
+# Every other page
+GET     /*path                      controllers.Application.index(path)

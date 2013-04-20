@@ -1,0 +1,15 @@
+<div data-bind="with: followers">
+
+<h3>Followers of <span data-bind="text: user.name"></span></h3>
+
+<ul class="unstyled userFollow" data-bind="foreach: followers">
+    <li>
+        <img data-bind="attr: {src: $data.gravatar + '?s=48'}, click: $root.viewProfile" style="float:left"/>
+        <span data-bind="text: $data.name, click: $root.viewProfile"></span>
+        <button class="btn btn-success" data-bind="visible: $data.canFollow, click: $root.followUser">Follow</button>
+        <button class="btn btn-danger" data-bind="visible: $data.canUnfollow, click: $root.unfollowUser">Unfollow</button>
+    </li>
+</ul>
+
+</div>
+

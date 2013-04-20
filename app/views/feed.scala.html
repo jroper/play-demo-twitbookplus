@@ -1,0 +1,19 @@
+
+<ul class="unstyled feed" data-bind="foreach: $data.feed">
+    <li>
+        <img data-bind="attr: {src: $data.user.gravatar + '?s=48'}, click: function() {$root.viewProfile($data.user)}" style="float:left"/>
+        <div class="like">
+            <div><span data-bind="text: $data.numLikes"></span> people like this.</div>
+            <div data-bind="if: $data.canLike">
+                <a href="#" data-bind="click: $root.like">Like</a>
+            </div>
+            <div data-bind="ifnot: $data.canLike">
+                <a href="#" data-bind="click: $root.unlike">Unlike</a>
+            </div>
+        </div>
+        <div>
+            <div class="updateName" data-bind="text: $data.user.name, click: function() {$root.viewProfile($data.user)}"></div>
+            <div class="updateText" data-bind="text: $data.text"></div>
+        </div>
+    </li>
+</ul>

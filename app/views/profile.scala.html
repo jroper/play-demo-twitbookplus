@@ -1,0 +1,27 @@
+<div data-bind="with: profile">
+<div data-bind="with: $data.user">
+<h2 data-bind="text: name"></h2>
+
+<div class="profilePic">
+<img data-bind="attr: {src: gravatar + '?s=160'}"/>
+</div>
+
+<dl class="dl-horizontal">
+    <dt>Following</dt>
+    <dd><a href="#" data-bind="click: $root.viewFollowing">
+        <span data-bind="text: following.length"></span> users</a>
+    </dd>
+    <dt>Followers</dt>
+    <dd><a href="#" data-bind="click: $root.viewFollowers">
+        <span data-bind="text: followers.length"></span> users</a>
+    </dd>
+    <dt>Updates</dt>
+    <dd data-bind="text: updates"></dd>
+</dl>
+</div>
+
+<h3>Feed</h3>
+
+@feed()
+
+</div>

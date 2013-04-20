@@ -1,0 +1,63 @@
+.content {
+    padding: 60px 10px 0 10px;
+}
+
+.userFollow {
+    max-width: 600px;
+}
+
+#userSearchDialog .userFollow {
+    width: 100%;
+}
+
+.userFollow li {
+    height: 50px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+.userFollow li button {
+    float: right;
+}
+
+.userFollow li img {
+    margin-right: 30px;
+    cursor: pointer;
+}
+.userFollow li span {
+    cursor: pointer;
+}
+
+.profilePic {
+    padding-left: 180px;
+}
+
+.feed li {
+    min-height: 50px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    max-width: 600px;
+}
+.feed .updateName {
+    font-weight: bold;
+    cursor: pointer;
+}
+.feed img {
+    padding: 0 20px 10px 0;
+    cursor: pointer;
+}
+
+.feed .like {
+    float: right;
+}
+
+textarea {
+    width: 95%;
+}

@@ -1,0 +1,46 @@
+<div data-bind="with: following">
+
+<h3>Users that <span data-bind="text: user.name"></span> is following</h3>
+
+<p data-bind="if: user.id == $root.loggedInUser().id">
+<button class="btn btn-success" data-bind="click: $root.userSearch">Find users</button>
+</p>
+
+<ul class="unstyled userFollow" data-bind="foreach: following">
+    <li>
+        <img data-bind="attr: {src: $data.gravatar + '?s=48'}, click: $root.viewProfile" style="float:left"/>
+        <span data-bind="text: $data.name, click: $root.viewProfile"></span>
+        <button class="btn btn-success" data-bind="visible: $data.canFollow, click: $root.followUser">Follow</button>
+        <button class="btn btn-danger" data-bind="visible: $data.canUnfollow, click: $root.unfollowUser">Unfollow</button>
+    </li>
+</ul>
+
+<div id="userSearchDialog" class="modal fade hide" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-bind="click: $root.closeDialogs"> × </button>
+        <h3>Find users</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <fieldset>
+                <label>Name</label>
+                <input type="text" data-bind="value: $root.userSearchField, valueUpdate: 'afterkeydown'">
+            </fieldset>
+        </form>
+        <ul class="unstyled userFollow" data-bind="foreach: $root.userSearchResults">
+            <li>
+                <img data-bind="attr: {src: $data.gravatar + '?s=48'}, click: $root.viewProfile" style="float:left"/>
+                <span data-bind="text: $data.name, click: $root.viewProfile"></span>
+                <button class="btn btn-success" data-bind="visible: $data.canFollow, click: $root.followUser">Follow</button>
+                <button class="btn btn-danger" data-bind="visible: $data.canUnfollow, click: $root.unfollowUser">Unfollow</button>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-bind="click: $root.closeDialogs">Done</button>
+    </div>
+</div>
+
+
+</div>
+

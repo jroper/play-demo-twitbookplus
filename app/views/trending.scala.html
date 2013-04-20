@@ -1,0 +1,7 @@
+<div data-bind="with: trending">
+    <h2>Trending topics</h2>
+    <dl class="dl-horizontal" data-bind="foreach: $data">
+        <dt data-bind="text: $data.term"></dt>
+        <dd data-bind="text: $data.count"></dd>
+    </dl>
+</div>
