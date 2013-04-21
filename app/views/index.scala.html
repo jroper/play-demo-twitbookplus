@@ -47,7 +47,8 @@
     </div>
     </div>
 
-    <div class="content">
+    @* display none and data-bind style is so that the contents don't flash on the screen before knockout can do its thing *@
+    <div class="content" data-bind="style: {display: 'block'}" style="display: none">
         <div data-bind="with: feed">
             @feed()
         </div>
