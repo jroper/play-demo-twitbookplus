@@ -47,7 +47,7 @@ public class FeedDao {
             "function() {" +
             "  var terms = this.text.split(' ');" +
             "  for (var i in terms) {" +
-            "    var term = /[\\w+#]+/.exec(terms[i])[0].toLowerCase();" +
+            "    var term = /[\\w+#]*/.exec(terms[i])[0].toLowerCase();" +
             "    if (term.length > 2) {" +
             "      emit(term, 1);" +
             "    }" +
