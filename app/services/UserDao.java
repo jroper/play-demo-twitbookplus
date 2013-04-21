@@ -21,20 +21,20 @@ public class UserDao {
         return bob;
     }
 
-    public List<User> get(Collection<String> ids) {
-        return Arrays.asList(bob, jane, jack);
+    public User create(User user) {
+        return bob;
     }
 
     public User findByEmail(String email) {
         return bob;
     }
 
-    public List<User> search(String term) {
-        return Arrays.asList(jane, jack);
+    public List<User> get(Collection<String> ids) {
+        return Arrays.asList(bob, jane, jack);
     }
 
-    public User create(User user) {
-        return bob;
+    public List<User> search(String term) {
+        return Arrays.asList(jane, jack);
     }
 
     public void follow(String id, String toFollow) {

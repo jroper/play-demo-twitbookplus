@@ -15,15 +15,15 @@ public class FeedDao {
     public FeedDao(MongoConnectionManager mongo) {
     }
 
-    public List<StatusUpdate> getFeed(List<String> userIds) {
-        return Arrays.asList(status1, status2, status3, status4);
+    public void save(StatusUpdate statusUpdate) {
     }
 
     public List<StatusUpdate> getFeed(String userId) {
         return Arrays.asList(status1, status3);
     }
 
-    public void save(StatusUpdate statusUpdate) {
+    public List<StatusUpdate> getFeed(List<String> userIds) {
+        return Arrays.asList(status1, status2, status3, status4);
     }
 
     public void like(String statusUpdateId, String userId) {

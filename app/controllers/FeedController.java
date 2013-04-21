@@ -45,7 +45,9 @@ public class FeedController extends Controller {
         for (StatusUpdate update: updates) {
             StatusUpdateView view = StatusUpdateView.fromStatusUpdate(update);
             view.user = userMap.get(update.getUser());
-            feed.add(view);
+            if (view.user != null) {
+                feed.add(view);
+            }
         }
         return ok(Json.toJson(feed));
     }
