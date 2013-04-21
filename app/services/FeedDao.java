@@ -57,12 +57,12 @@ public class FeedDao {
             "    }" +
             "  }" +
             "}",
-            "function(k, vals) {" +
-            "  var count = 0;" +
-            "  for (var i in vals) {" +
-            "    count += vals[i];" +
+            "function(term, counts) {" +
+            "  var total = 0;" +
+            "  for (var i in counts) {" +
+            "    total += counts[i];" +
             "  }" +
-            "  return count;" +
+            "  return total;" +
             "}",
             MapReduce.OutputType.REPLACE,
             "trending",
