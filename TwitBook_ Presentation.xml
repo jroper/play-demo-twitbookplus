@@ -869,7 +869,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="mrr1" value=" &quot;&quot; + &#10;&quot;function(key, vals) {&quot; +$END$&#10;&quot;}&quot;," description="FeedDao mapReduce reduce1" toReformat="false" toShortenFQNames="true">
+  <template name="mrr1" value=" &quot;&quot; + &#10;&quot;function(term, counts) {&quot; +$END$&#10;&quot;}&quot;," description="FeedDao mapReduce reduce1" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />
@@ -900,7 +900,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="mrr2" value="&quot;  var count = 0;&quot; +&#10;&quot;  for (var i in vals) {&quot; +&#10;&quot;    count += vals[i];&quot; +&#10;&quot;  }&quot; +&#10;" description="FeedDao mapReduce reduce2" toReformat="false" toShortenFQNames="true">
+  <template name="mrr2" value="&quot;  var total = 0;&quot; +&#10;&quot;  for (var i in counts) {&quot; +&#10;&quot;    total += counts[i];&quot; +&#10;&quot;  }&quot; +&#10;" description="FeedDao mapReduce reduce2" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />
@@ -931,7 +931,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="mrr3" value="&quot;  return count;&quot; +" description="FeedDao mapReduce reduce3" toReformat="false" toShortenFQNames="true">
+  <template name="mrr3" value="&quot;  return total;&quot; +" description="FeedDao mapReduce reduce3" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />
